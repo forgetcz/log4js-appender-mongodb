@@ -6,8 +6,8 @@
 
         // Type Checking
         "strict": true,
-        // "noUnusedLocals": true,
-        // "noUnusedParameters": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "rootDir": "src",
         "noFallthroughCasesInSwitch": true,
 
@@ -31,7 +31,7 @@
         // Completeness
         "skipLibCheck": true,
 
-        "esModuleInterop": true
+        "esModuleInterop": true,
     },
     "include": ["src/**/*", "types/**/*"],
     "exclude": [
@@ -39,6 +39,6 @@
         "**/*.spec.ts",
         "**/*.test.ts",
         "**/__tests__/*",
-        "**/*__mocks__*"
-    ]
+        "**/*__mocks__*",
+    ],
 }

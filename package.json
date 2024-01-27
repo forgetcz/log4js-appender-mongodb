@@ -1,27 +1,22 @@
 {
-    "name": "log4js-db-mongodb-esnext",
-    "version": "2.0.4",
+    "name": "log4js-appender-mongodb",
+    "version": "0.0.1",
     "description": "MongoDb Appender for log4js-node",
-    "homepage": "https://github.com/forgetcz/log4js-db-mongodb",
+    "homepage": "https://github.com/forgetcz/log4js-appender-mongodb",
     "main": "./dist/index.js",
     "types": "./dist/types/types.d.ts",
     "files": [
-        "dist"
+        "dist",
+        "src"
     ],
     "scripts": {
-        "start": "node -r dotenv/config ./dist/index.js",
-        "dev": "ts-node -r dotenv/config ./src/index.ts dotenv_config_path=./env/local",
-        "lint": "eslint . --ext .js,.jsx,.ts --fix",
-        "build": "npm run lint && rm -rf ./dist && tsc",
-        "watch": "npx tsc -w",
-        "watch-node": "nodemon --exec 'ts-node' ./src/index.ts",
-        "test": "jest",
+        "lint": "eslint . --ext .js,.jsx,.ts",
+        "lintFix": "eslint . --ext .js,.jsx,.ts --fix",
         "prettier": "npx prettier --write ./src/**/*.{ts,js}",
+        "prettierFix": "npx prettier --write ./src/**/*.{ts,js} --fix",
+        "build": "npm run lint && rm -rf ./dist && npx tsc",
         "removeW": "RMDIR /S /Q dist",
-        "compileW": "tsc",
-        "buildW": "npm run lint && npm run removeW && npm run compileW",
-        "clean": "rm -rf ./dist && rm package-lock.json && rm -rf ./node_modules",
-        "clean-build": "npm i && npx tsc"
+        "buildW": "npm run lint && npm run prettier && npm run removeW && npx tsc"
     },
     "keywords": [
         "logging",
@@ -30,7 +25,7 @@
         "node",
         "mongo"
     ],
-    "author": "it@onio.cz",
+    "author": "forget@seznam.cz",
     "license": "ISC",
     "dependencies": {
         "lodash": "^4.17.21",
