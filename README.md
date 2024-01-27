@@ -34,15 +34,14 @@ export default function getLogger(category?: string): log4js.Logger {
  */
 function configureLog4js(): void {
     const curentAppenders: Array<string> = [];
-    curentAppenders.push('restAppender');
     curentAppenders.push('just_errors');
 
     configure({
         appenders: {
             dbAppender: {
-                type: 'log4js-db-mongodb',
+                type: 'log4js-db-mongodb-esnext',
                 mongoSetting: {
-                    url: 'mongodb+srv://logging:iyBQ4FxqWOHwQiOI@bull-wsttp.mongodb.net/messenger',
+                    url: 'your connection is here',
                     options: {
                         useNewUrlParser: true,
                         useUnifiedTopology: true,
