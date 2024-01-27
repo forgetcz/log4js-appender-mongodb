@@ -1,0 +1,51 @@
+{
+    "name": "log4js-db-mongodb-esnext",
+    "version": "2.0.4",
+    "description": "MongoDb Appender for log4js-node",
+    "homepage": "https://github.com/forgetcz/log4js-db-mongodb",
+    "main": "./dist/index.js",
+    "types": "./dist/types/types.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "start": "node -r dotenv/config ./dist/index.js",
+        "dev": "ts-node -r dotenv/config ./src/index.ts dotenv_config_path=./env/local",
+        "lint": "eslint . --ext .js,.jsx,.ts --fix",
+        "build": "npm run lint && rm -rf ./dist && tsc",
+        "watch": "npx tsc -w",
+        "watch-node": "nodemon --exec 'ts-node' ./src/index.ts",
+        "test": "jest",
+        "prettier": "npx prettier --write ./src/**/*.{ts,js}",
+        "removeW": "RMDIR /S /Q dist",
+        "compileW": "tsc",
+        "buildW": "npm run lint && npm run removeW && npm run compileW",
+        "clean": "rm -rf ./dist && rm package-lock.json && rm -rf ./node_modules",
+        "clean-build": "npm i && npx tsc"
+    },
+    "keywords": [
+        "logging",
+        "log",
+        "log4js",
+        "node",
+        "mongo"
+    ],
+    "author": "it@onio.cz",
+    "license": "ISC",
+    "dependencies": {
+        "lodash": "^4.17.21",
+        "mongodb": "^6.3.0"
+    },
+    "devDependencies": {
+        "@types/lodash": "^4.14.202",
+        "@types/mongodb": "^4.0.7",
+        "@types/node": "^20.10.3",
+        "@typescript-eslint/eslint-plugin": "^6.13.2",
+        "@typescript-eslint/parser": "^6.13.2",
+        "eslint": "^8.55.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.0.1",
+        "log4js-node-next": "^1.0.27",
+        "prettier": "^3.1.0"
+    }
+}
