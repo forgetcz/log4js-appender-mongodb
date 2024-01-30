@@ -1,79 +1,54 @@
-# Rest Appender for log4js-node
+## og4js-node-next mongo appender
 
-Sends [log] events to a [mongodb]. This is an optional appender for use with [log4js](https://log4js-node.github.io/log4js-node/).
+This is custom appender for [log4js-node-next](https://www.npmjs.com/package/log4js-node-next) appender.
+Sends log events to a [mongo](https://www.mongodb.com/) database.
+Optional to use with [log4js-layouts](https://www.npmjs.com/package/log4js-layouts)
 
-## Configuration
+The full documentation is available [here](https://github.com/forgetcz/log4js-appender-mongodb).
+
+## Simple Example
+
 ```bash
-npm install log4js-db-mongodb
+npm i log4js-node-next
+npm install log4js-appender-mongodb
 npm install os
 ```
 ## Example
 
-```javascript
-import { configure, levels } from 'log4js';
-import * as log4js from 'log4js';
+```Typescript
+import { configureLogger, getLogger, logLevels } from 'log4js-node-next';
+import { eCoreAppenderType } from 'log4js-node-next/dist/types/enums.js';
 
-const loggers: { [key: string]: log4js.Logger } = {};
-
-/**
- * @description Get logger with configuration
- */
-export default function getLogger(category?: string): log4js.Logger {
-    if (!category) {
-        category = '';
-    }
-    if (loggers[category] === undefined) {
-        configureLog4js();
-        loggers[category] = log4js.getLogger(category);
-    }
-    return loggers[category];
-}
-
-/**
- * @description Log4js konfiguration
- */
-function configureLog4js(): void {
-    const curentAppenders: Array<string> = [];
-    curentAppenders.push('just_errors');
-
-    configure({
+if (require.main === module) {
+    configureLogger({
         appenders: {
-            dbAppender: {
-                type: 'log4js-db-mongodb-esnext',
-                mongoSetting: {
-                    url: 'your connection is here',
-                    options: {
-                        useNewUrlParser: true,
-                        useUnifiedTopology: true,
-                        ignoreUndefined: true,
-                    },
-                    database: 'messenger',
-                    collection: 'log',
-                },
-                layout: {},
-            },
-            just_errors: {
-                type: 'logLevelFilter',
-                appender: 'dbAppender',
-                level: 'ERROR',
+            consoleAppender: {
+                type: eCoreAppenderType.console,
             },
         },
         categories: {
             default: {
-                appenders: curentAppenders,
-                level: 'DEBUG',
+                appenders: [`hangoutAlert`],
+                minLevel: logLevels.DEBUG,
+                maxLevel: logLevels.FATAL,
             },
         },
-    });
+    })
+        .then(() => {
+            const logger = getLogger();
+            const debugFunctions = logger.debug('Debug message...');
+
+            Promise.allSettled(debugFunctions).then((res) => {
+                const resErr = res.filter((f) => f.status === 'rejected');
+
+                if (resErr.length > 0) {
+                    console.error('There is a error in debugger processing');
+                }
+            });
+        })
+        .catch((err) => {
+            console.error(err);
+        });
 }
 
-const logger = getLogger();
-logger.warn('App start');
-
 ```
-
-#Version
-    - 0.2.3
-        - full promise
-        - mongo 5.2.0
-        - log4js 6.9.1

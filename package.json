@@ -1,7 +1,7 @@
 {
-    "name": "log4js-appender-mongodb",
-    "version": "0.0.1",
-    "description": "MongoDb Appender for log4js-node",
+    "name": "log4js-db-mongodb-esnext",
+    "version": "2.0.6",
+    "description": "MongoDb Appender for log4js-node-next",
     "homepage": "https://github.com/forgetcz/log4js-appender-mongodb",
     "main": "./dist/index.js",
     "types": "./dist/types/types.d.ts",
